@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
+require 'thisisstable'
+
+gem = ARGV[0]
+
+raise "Must specify gem (popularize-gem [gem-name])" if !gem || gem == ''
+ThisIsStable.popularize(gem)
