@@ -14,7 +14,7 @@ module ThisIsStable
         loop do
           %x[gem install --install-dir #{path} #{gem}]
           puts "[#{$$}] Installed #{gem}"
-          %x[gem uninstall --install-dir #{path} #{gem}]
+          %x[gem uninstall -x -q --install-dir #{path} #{gem}]
         end
       end
     end
