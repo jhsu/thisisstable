@@ -3,10 +3,10 @@ require 'fileutils'
 module ThisIsStable
   extend self
 
-  def popularize(gem)
+  def vouch(gem)
+    puts "Vouching gem: #{gem}"
     3.times do
       fork do
-        puts "Popularizing '#{gem}'"
         path = "./#{$$}-#{gem}/"
         Dir.mkdir(path) unless Dir.exists?(path)
         trap (:INT) { FileUtils.rm_rf(path); exit 0 }
@@ -19,6 +19,5 @@ module ThisIsStable
       end
     end
     Process.waitall
-    exit 0
   end
 end

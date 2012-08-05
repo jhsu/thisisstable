@@ -6,4 +6,4 @@ require 'thisisstable'
 gem = ARGV[0]
 
 raise "Must specify gem (popularize-gem [gem-name])" if !gem || gem == ''
-ThisIsStable.popularize(gem)
+ThisIsStable.vouch(gem)

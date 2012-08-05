@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.files             = %w( README.markdown LICENSE )
   s.files            += Dir.glob("lib/**/*")
   s.files            += Dir.glob("bin/**/*")
-  s.executables       = [ "popularize-gem" ]
+  s.executables       = [ "vouch-gem" ]
 
   s.description = <<description
 description
