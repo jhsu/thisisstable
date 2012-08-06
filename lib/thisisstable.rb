@@ -5,8 +5,10 @@ module ThisIsStable
 
   def vouch(gem)
     puts "Vouching gem: #{gem}"
-    3.times do
-      fork do
+
+    children = []
+    5.times do
+      children << fork do
         path = "./#{$$}-#{gem}/"
         Dir.mkdir(path) unless Dir.exists?(path)
         trap (:INT) { FileUtils.rm_rf(path); exit 0 }
@@ -14,10 +16,12 @@ module ThisIsStable
         loop do
           %x[gem install --install-dir #{path} #{gem}]
           puts "[#{$$}] Installed #{gem}"
-          %x[gem uninstall -x -q --install-dir #{path} #{gem}]
+          %x[rm -r #{path}]
         end
       end
     end
+
+    trap (:INT) { children.each {|pid| Process.kill("INT", pid)} ; exit 0 }
     Process.waitall
   end
 end
